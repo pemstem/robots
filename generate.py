@@ -14,7 +14,6 @@ def Create_Robot():
     pyrosim.Send_Cube(name="FrontLeg", pos=[0.5,0,-0.5] , size=[1,1,1])
     pyrosim.End()
 
-
 if __name__ == "__main__":
     Create_World()
     Create_Robot()
