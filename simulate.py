@@ -22,6 +22,8 @@ frontLegSensorValues = np.zeros(1000)
 radianValues = np.linspace(0, 2*np.pi, num= 1000)
 targetAngles = (np.pi/4)*np.sin(radianValues)
 
+np.save("data/targetAngles.npy", targetAngles)
+
 for i in range(0,1000):
     p.stepSimulation()
     time.sleep(1/60)
