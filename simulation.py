@@ -33,3 +33,5 @@ class SIMULATION:
                                         targetPosition = frontLegTargetAngles[i], 
                                         maxForce = 40)
             '''
+    def __del__(self):
+        p.disconnect()
