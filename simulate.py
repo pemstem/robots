@@ -65,3 +65,4 @@ for i in range(c.steps):
 p.disconnect()
 '''
 simulation = SIMULATION()
+simulation.Run()
