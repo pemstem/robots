@@ -4,15 +4,10 @@ import pybullet_data
 import pyrosim.pyrosim as pyrosim
 import numpy as np
 import math
+import constants as c
 import random
 
 PI = math.pi
-frontAmplitude = PI/3
-backAmplitude = PI/4
-frontFrequency = 8
-backFrequency = 10
-frontPhaseOffset = 0
-backPhaseOffset = 0
 
 physicsClient = p.connect(p.GUI)
 p.setAdditionalSearchPath(pybullet_data.getDataPath())
@@ -22,27 +17,27 @@ p.loadSDF("world.sdf")
 robotId = p.loadURDF("body.urdf")
 pyrosim.Prepare_To_Simulate(robotId)
 
-backLegSensorValues = np.zeros(1000)
-frontLegSensorValues = np.zeros(1000)
+backLegSensorValues = np.zeros(c.steps)
+frontLegSensorValues = np.zeros(c.steps)
 
-radianValues = np.linspace(0, 2*np.pi, num= 1000)
+radianValues = np.linspace(0, 2*np.pi, num= c.steps)
 targetAngles = (np.pi/4)*np.sin(radianValues)
 
-backLegTargetAngles = np.zeros(1000)
-backLegRadianValues = np.linspace(0, 2*np.pi, num= 1000)
-for i in range(1000):
-    backLegTargetAngles[i] = backAmplitude*np.sin(backFrequency*backLegRadianValues[i] + backPhaseOffset)
+backLegTargetAngles = np.zeros(c.steps)
+backLegRadianValues = np.linspace(0, 2*np.pi, num= c.steps)
+for i in range(c.steps):
+    backLegTargetAngles[i] = c.backAmplitude*np.sin(c.backFrequency*backLegRadianValues[i] + c.backPhaseOffset)
 
-frontLegTargetAngles = np.zeros(1000)
-frontLegRadianValues = np.linspace(0, 2*np.pi, num= 1000)
-for i in range(1000):
-    frontLegTargetAngles[i] = frontAmplitude*np.sin(frontFrequency*frontLegRadianValues[i] + frontPhaseOffset)
+frontLegTargetAngles = np.zeros(c.steps)
+frontLegRadianValues = np.linspace(0, 2*np.pi, num= c.steps)
+for i in range(c.steps):
+    frontLegTargetAngles[i] = c.frontAmplitude*np.sin(c.frontFrequency*frontLegRadianValues[i] + c.frontPhaseOffset)
 
 #np.save("data/backTargetAngleValues.npy", backLegTargetAngles)
 #np.save("data/frontTargetAngleValues.npy", frontLegTargetAngles)
 #exit()
 
-for i in range(0,1000):
+for i in range(c.steps):
     p.stepSimulation()
     time.sleep(1/60)
     backLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
