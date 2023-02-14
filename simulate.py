@@ -5,10 +5,11 @@ import pyrosim.pyrosim as pyrosim
 import numpy as np
 import math
 import constants as c
+from simulation import SIMULATION
 import random
 
 PI = math.pi
-
+'''
 physicsClient = p.connect(p.GUI)
 p.setAdditionalSearchPath(pybullet_data.getDataPath())
 p.setGravity(0,0,-9.8)
@@ -62,3 +63,5 @@ for i in range(c.steps):
 
 
 p.disconnect()
+'''
+simulation = SIMULATION()
