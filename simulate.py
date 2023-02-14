@@ -35,9 +35,9 @@ frontLegRadianValues = np.linspace(0, 2*np.pi, num= 1000)
 for i in range(1000):
     frontLegTargetAngles[i] = amplitude*np.sin(frequency*frontLegRadianValues[i] + phaseOffset)
 
-np.save("data/backTargetAngleValues.npy", backLegTargetAngles)
-np.save("data/frontTargetAngleValues.npy", frontLegTargetAngles)
-exit()
+#np.save("data/backTargetAngleValues.npy", backLegTargetAngles)
+#np.save("data/frontTargetAngleValues.npy", frontLegTargetAngles)
+#exit()
 
 for i in range(0,1000):
     p.stepSimulation()
@@ -47,7 +47,7 @@ for i in range(0,1000):
     pyrosim.Set_Motor_For_Joint(bodyIndex = robotId, 
                                 jointName = "Torso_BackLeg", 
                                 controlMode = p.POSITION_CONTROL, 
-                                targetPosition = backLegTargetValues[i], 
+                                targetPosition = backLegTargetAngles[i], 
                                 maxForce = 40)
     
     pyrosim.Set_Motor_For_Joint(bodyIndex = robotId, 
