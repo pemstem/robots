@@ -1,5 +1,6 @@
 import pybullet as p
 import pybullet_data
+import pyrosim.pyrosim as pyrosim
 import time
 import constants as c
 from world import WORLD
@@ -15,8 +16,8 @@ class SIMULATION:
 
     def Run(self):
         for i in range(c.steps):
-            print(i)
             p.stepSimulation()
+            ROBOT.Sense()
             time.sleep(1/60)
             '''
             backLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
