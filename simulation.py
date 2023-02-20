@@ -13,12 +13,15 @@ class SIMULATION:
         p.setGravity(0,0,-9.8)
         self.world = WORLD()
         self.robot = ROBOT()
+    
+    def __del__(self):
+        p.disconnect()
 
     def Run(self):
         for i in range(c.steps):
             p.stepSimulation()
-            ROBOT.Sense()
-            time.sleep(1/60)
+            self.robot.Sense(i)
+            time.sleep(1/1000)
             '''
             backLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("BackLeg")
             frontLegSensorValues[i] = pyrosim.Get_Touch_Sensor_Value_For_Link("FrontLeg")
@@ -34,5 +37,3 @@ class SIMULATION:
                                         targetPosition = frontLegTargetAngles[i], 
                                         maxForce = 40)
             '''
-    def __del__(self):
-        p.disconnect()
