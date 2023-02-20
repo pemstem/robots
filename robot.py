@@ -2,6 +2,7 @@ import pybullet as p
 import pybullet_data
 import pyrosim.pyrosim as pyrosim
 from sensor import SENSOR
+from motor import MOTOR
 import constants as c
 import numpy as np
 
@@ -22,3 +23,9 @@ class ROBOT:
         # When called, this method should store the current value of the touch sensor in self.values. But, we do not know which element it should be stored in. It should be stored in the tth element, where t is the current time step.
         for i in self.sensors:
             self.sensors[i].Get_Value(t)
+    
+    def Preapre_To_Act(self):
+        self.motors = {}
+        for jointName in pyrosim.jointNamesToIndices:
+            self.motors[jointName] = MOTOR(jointName)
+    
