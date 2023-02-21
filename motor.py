@@ -6,28 +6,29 @@ import pybullet as p
 class MOTOR:
     def __init__(self, jointName):
         self.jointName = jointName
-        self.values = np.zeros(c.steps)
+        print(self.jointName)
+        self.Prepare_To_Act()
     
-    # HELP
     def Prepare_To_Act(self):
-        self.amplitude = np.pi/3
-        self.frequency =  8
-        self.offset = 0
+        if (self.jointName == "Torso_BackLeg"):
+            self.frequency =  c.backFrequency/2
+        else:
+            self.frequency = c.backFrequency
+        
+        self.amplitude = c.backAmplitude
+        self.offset = c.backPhaseOffset
 
-        backLegTargetAngles = np.zeros(c.steps)
-        backLegRadianValues = np.linspace(0, 2*np.pi, num= c.steps)    
-        for i in range(c.steps):
-            backLegTargetAngles[i] = self.amplitude*np.sin(self.frequency*backLegRadianValues[i] + self.offset)
-
-        frontLegTargetAngles = np.zeros(c.steps)
-        frontLegRadianValues = np.linspace(0, 2*np.pi, num= c.steps)
-        for i in range(c.steps):
-            frontLegTargetAngles[i] = self.amplitude*np.sin(self.frequency*frontLegRadianValues[i] + self.offset)
+        self.radianValues = np.linspace(0, 2*np.pi, num= c.steps)    
+        self.motorValues = self.amplitude * np.sin(self.frequency * self.radianValues + self.offset)
 
     def Set_Value(self, robot, time):
-        self.robot= robot
-        pyrosim.Set_Motor_For_Joint(robot, 
-                                    self.jointName, 
+        pyrosim.Set_Motor_For_Joint(bodyIndex= robot, 
+                                    jointName= self.jointName, 
                                     controlMode = p.POSITION_CONTROL, 
-                                    targetPosition = backLegTargetAngles[i], 
-                                    maxForce = 40)
+                                    targetPosition = self.motorValues[time], 
+                                    maxForce = c.motorMaxForce)
+    
+    def Save_Value(self):
+        targetAnglesData = open("data/" + self.jointName + ".npy", "w")
+        np.save(targetAnglesData, self.motorValues)
+        targetAnglesData.close()
