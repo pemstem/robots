@@ -29,10 +29,16 @@ class NEURAL_NETWORK:
         print("")
     
     def Update(self):
-        #for loop that iterates over the keys in the dictionary of neurons. In the for loop, print the name of the keys.
-        for i in self.neurons:
-            if self.neurons[i].Is_Sensor_Neuron():
-                self.neurons[i].Update_Sensor_Neuron()
+
+        for neuronName in self.neurons:
+
+            if self.neurons[neuronName].Is_Sensor_Neuron():
+
+                self.neurons[neuronName].Update_Sensor_Neuron()
+            
+            else:
+
+                self.neurons[neuronName].Update_Hidden_Or_Motor_Neuron()
 
 # ---------------- Private methods --------------------------------------
 
