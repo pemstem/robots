@@ -56,9 +56,12 @@ class NEURON:
 
         return self.type == c.MOTOR_NEURON
     
-    def Update_Hidden_Or_Motor_Neuron(self):
+    def Update_Hidden_Or_Motor_Neuron(self, neurons, synapses):
         
         self.Set_Value(0.0)
+        for synapseName in synapses:
+            print(synapseName)
+        exit()
 
     def Print(self):
 
