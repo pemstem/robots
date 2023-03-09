@@ -6,6 +6,6 @@ frontPhaseOffset = 0
 backAmplitude = np.pi/4
 backFrequency = 8
 backPhaseOffset = 0
-steps = 1000
+steps = 500
 motorMaxForce = 40
 numberOfGenerations = 2
