@@ -1,7 +1,7 @@
 import os
-import hillclimber
+from hillclimber import HILL_CLIMBER
 
-hc = hillclimber.HILL_CLIMBER()
+hc = HILL_CLIMBER()
 hc.Evolve()
 
 #for i in range(5):

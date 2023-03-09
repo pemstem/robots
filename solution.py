@@ -13,7 +13,7 @@ class SOLUTION:
         self.Create_Body()
         self.Create_Brain()
 
-        os.system("python simulate.py")
+        os.system("python3 simulate.py")
 
 
     def Create_World(self):
