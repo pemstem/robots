@@ -8,4 +8,4 @@ backFrequency = 8
 backPhaseOffset = 0
 steps = 500
 motorMaxForce = 40
-numberOfGenerations = 2
+numberOfGenerations = 10
