@@ -35,13 +35,10 @@ class ROBOT:
                 jointName = self.nn.Get_Motor_Neurons_Joint(neuronName)
                 desiredAngle = self.nn.Get_Value_Of(neuronName)
                 self.motors[jointName].Set_Value(self.robot, desiredAngle)
-                print(neuronName)
-                print(jointName)
-                print(desiredAngle)
     
     def Think(self,t):
         self.nn.Update()
-        self.nn.Print()
+        #self.nn.Print()
 
     def Get_Fitness(self):
         stateOfLinkZero= p.getLinkState(self.robot,0)

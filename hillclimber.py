@@ -14,9 +14,9 @@ class HILL_CLIMBER:
     def Evolve_For_One_Generation(self):
         self.Spawn()
         self.Mutate()
-        self.child.Evaluate("GUI")
-        self.Select()
+        self.child.Evaluate("DIRECT")
         self.Print()
+        self.Select()
     
     def Spawn(self):
         self.child = copy.deepcopy(self.parent)
@@ -30,7 +30,7 @@ class HILL_CLIMBER:
 
     def Print(self):
         print("")
-        print("Parent Fitness: " + str(self.parent.fitness) + "Child Fitness: " + str(self.child.fitness))
+        print("Parent Fitness: " + str(self.parent.fitness) + " Child Fitness: " + str(self.child.fitness))
         print("")
     
     def Show_Best(self):
