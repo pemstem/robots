@@ -9,3 +9,4 @@ backPhaseOffset = 0
 steps = 500
 motorMaxForce = 40
 numberOfGenerations = 10
+populationSize = 2
