@@ -5,8 +5,10 @@ import copy
 class PARALLEL_HILL_CLIMBER:
     def __init__(self):
         self.parents = {}
+        self.nextAvailableID = 0
         for i in range(c.populationSize):
-            self.parents[i] = SOLUTION()
+            self.parents[i] = SOLUTION(self.nextAvailableID)
+            self.nextAvailableID += 1
 
 
     def Evolve(self):
@@ -26,8 +28,13 @@ class PARALLEL_HILL_CLIMBER:
         #self.Select()
         pass
     
+    #assign unique IDs to new child solutions, in PHC's Spawn() method
     def Spawn(self):
         self.child = copy.deepcopy(self.parent)
+        newID = self.nextAvailableID
+        self.child.Set_ID(newID)
+        self.nextAvailableID += 1
+
 
     def Mutate(self):
         self.child.Mutate()
